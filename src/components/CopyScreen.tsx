@@ -1,6 +1,10 @@
 "use client";
 
 import { formatUsd } from "@/lib/format";
+import {
+  COPY_FIXTURE_NOTICE,
+  PAPER_BUY_DISCLAIMER,
+} from "@/lib/legalCopy";
 import { canAffordCopyBuy, slippedTokenAmount } from "@/lib/paper";
 import { shortenAddress } from "@/lib/solana";
 import type { CopyDelaySeconds, PaperState, UnsignedQuote } from "@/lib/types";
@@ -84,12 +88,8 @@ export function CopyScreen({
       <div className="wallet-section">
       <div className="section-title">Copy watch (technical fixture)</div>
       <div className="card hi">
-        <p className="fee-line" style={{ marginTop: 0 }}>
-          <strong className="alert-strong">Not a recommendation.</strong>{" "}
-          Paste any public Solana address to watch its trades as a technical
-          fixture / watch tool. Pasting an address does not mean the wallet is
-          skilled or worth copying. No preset list. Public addresses only —
-          never a seed or private key. Public RPC is demo-grade.
+        <p className="fee-line alert-strong" style={{ marginTop: 0 }}>
+          {COPY_FIXTURE_NOTICE}
         </p>
         <label className="field" style={{ marginTop: 10 }}>
           <span>Public Solana wallet address</span>
@@ -108,7 +108,7 @@ export function CopyScreen({
             {watchError}
           </div>
         )}
-        <div className="field-row" style={{ marginTop: 10 }}>
+        <div style={{ marginTop: 10 }}>
           <label className="field">
             <span>Delay before quote</span>
             <select
@@ -137,7 +137,8 @@ export function CopyScreen({
         </div>
         <p className="fee-line">
           Status: {copyStatus}. Polls ~every 5s only while following in this
-          browser tab — not a 24/7 collector. Assumed slippage{" "}
+          browser tab — not a 24/7 collector. No preset list. Public RPC is
+          demo-grade. Assumed slippage{" "}
           {(state.slippageRate * 100).toFixed(0)}%. Jupiter quotes are unsigned
           estimates (no taker / no transaction).
         </p>
@@ -203,6 +204,19 @@ export function CopyScreen({
                   raw. Creator: {s.creatorLabel}. Estimates only — not guaranteed
                   fills. Viewing does not create a position.
                 </p>
+                <p className="jupiter-credit">
+                  <a
+                    href="https://jup.ag"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Powered by Jupiter
+                  </a>
+                  <span className="muted">
+                    {" "}
+                    · unsigned quote estimate
+                  </span>
+                </p>
                 {s.direction !== "SELL" && s.costBlockedReason && (
                   <div className="error">{s.costBlockedReason}</div>
                 )}
@@ -254,6 +268,7 @@ export function CopyScreen({
                       quotes already include on-chain fees — not added again to
                       your copy cost basis. Simulated only.
                     </p>
+                    {s.direction !== "SELL" && <p>{PAPER_BUY_DISCLAIMER}</p>}
                     {s.direction !== "SELL" && (
                       <LevelsFields
                         levels={s.levels}
