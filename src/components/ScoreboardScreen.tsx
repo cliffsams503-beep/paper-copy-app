@@ -83,8 +83,13 @@ export function ScoreboardScreen({
             Creator fee rate {(CREATOR_FEE_RATE * 100).toFixed(3)}% (Pump.fun
             documented bonding-curve creator fee)
           </div>
-          <div style={{ fontWeight: 800 }}>
-            {formatUsd(summary.creatorFeeTotal)}
+          <div style={{ textAlign: "right" }}>
+            <div style={{ fontWeight: 800 }}>
+              {formatUsd(summary.creatorFeeTotal)}
+            </div>
+            <div className="small muted">
+              Scoreboard credit · not a payout
+            </div>
           </div>
         </div>
         <label className="field" style={{ marginTop: 10 }}>
@@ -151,7 +156,9 @@ export function ScoreboardScreen({
       <div className="section-title">Creator fee earnings (scoreboard only)</div>
       <div className="card">
         <p className="fee-line" style={{ marginTop: 0 }}>
-          Per-meme buckets. Copy trades: estimated 0.300% recorded here; not
+          Per-meme buckets. Dollar figures here are scoreboard credits only,
+          not real payouts or money. They cannot be spent, transferred, or
+          withdrawn. Copy trades: estimated 0.300% recorded here; not
           subtracted again from copy cost basis (Jupiter quotes include on-chain
           creator/protocol fees).
         </p>
@@ -179,6 +186,9 @@ export function ScoreboardScreen({
               {formatUsd(c.totalFeesUsd)}
               <div className="small muted">
                 buy {formatUsd(c.buyFeesUsd)} / sell {formatUsd(c.sellFeesUsd)}
+              </div>
+              <div className="small muted">
+                Scoreboard credit · not a payout
               </div>
             </div>
           </div>

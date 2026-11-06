@@ -32,6 +32,7 @@ import type {
 import { DEFAULT_STAKE_USD } from "@/lib/types";
 import { CopyScreen, type CopySignal } from "./CopyScreen";
 import { emptyLevels, parseLevel, type LevelsDraft } from "./LevelsFields";
+import { LegalFooter } from "./LegalFooter";
 import { ListScreen } from "./ListScreen";
 import { PositionsScreen } from "./PositionsScreen";
 import { ScoreboardScreen } from "./ScoreboardScreen";
@@ -905,6 +906,8 @@ export default function PaperCopyApp() {
           />
         )}
       </main>
+
+      <LegalFooter />
 
       <nav className="nav" aria-label="Primary">
         <button

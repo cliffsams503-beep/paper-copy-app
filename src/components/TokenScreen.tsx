@@ -8,6 +8,7 @@ import {
 import { canAffordBuy, previewMemeBuyFill } from "@/lib/paper";
 import type { MemeToken, PaperState } from "@/lib/types";
 import { CREATOR_FEE_RATE, DEFAULT_STAKE_USD } from "@/lib/types";
+import { PAPER_BUY_DISCLAIMER } from "@/lib/legalCopy";
 import {
   LevelsDraft,
   LevelsFields,
@@ -149,6 +150,7 @@ export function TokenScreen({
             {formatUsd(preview.cost)}. Slippage worsens fill, not extra cash.
             Simulated only.
           </p>
+          <p>{PAPER_BUY_DISCLAIMER}</p>
           <LevelsFields
             levels={levels}
             onChange={onLevels}
